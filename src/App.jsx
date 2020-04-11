@@ -3,7 +3,6 @@ import "./styles.scss";
 
 import fetchLight from "./fetchLight";
 
-
 const ChangeButton = (onClick) => {
   return (
     <button
@@ -13,20 +12,11 @@ const ChangeButton = (onClick) => {
   )
 }
 
-const orderedMode = () => {
-  console.log('orderedMode')
-}
-
-const randomMode = () => {
-  console.log('randomMode')
-}
-
 const Light = () => {
   const [isOrderedMode, setIsOrderedMode] = useState(false);
   const [isTrafficLightActivated, setIsTrafficLightActivated] = useState(false);
-  const [isTopActive, setIsTopActive] = useState(false);
-  const [isMiddleActive, setIsMiddleActive] = useState(false);
-  const [isBottomActive, setIsBottomActive] = useState(false);
+
+  const [activeColor, setActiveColor] = useState(null);
 
   const activateTrafficLight = () => {
     if (!isTrafficLightActivated) {
@@ -36,9 +26,7 @@ const Light = () => {
   }
 
   const activateRandomLight = () => {
-    const options = [setIsTopActive, setIsMiddleActive, setIsBottomActive];
-    const randomLightActivator = options[Math.floor(Math.random() * 3)];
-    randomLightActivator(true);
+    fetchLight({ mode: 'random' }).then((value) => setActiveColor(value));
   }
 
   return (
@@ -46,9 +34,9 @@ const Light = () => {
       <div
         className="lights-container"
         onClick={() => activateTrafficLight()}>
-        <div className={`light top-light ${isTopActive ? "active" : ""}`} />
-        <div className={`light middle-light ${isMiddleActive ? "active" : ""}`} />
-        <div className={`light bottom-light ${isBottomActive ? "active" : ""}`} />
+        <div className={`light top-light ${activeColor === 'red' ? "active" : ""}`} />
+        <div className={`light middle-light ${activeColor === 'yellow' ? "active" : ""}`} />
+        <div className={`light bottom-light ${activeColor === 'green' ? "active" : ""}`} />
       </div>
       <ChangeButton
         onClick={() => setIsOrderedMode(!isOrderedMode)} />
