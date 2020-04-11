@@ -3,10 +3,10 @@ import "./styles.scss";
 
 import fetchLight from "./fetchLight";
 
-const ChangeButton = (onClick) => {
+const ChangeButton = ({ handleClick }) => {
   return (
     <button
-      onClick={() => onClick()}>
+      onClick={() => handleClick()}>
       Change!
     </button>
   )
@@ -15,8 +15,9 @@ const ChangeButton = (onClick) => {
 const Light = () => {
   const [isOrderedMode, setIsOrderedMode] = useState(false);
   const [isTrafficLightActivated, setIsTrafficLightActivated] = useState(false);
-
   const [activeColor, setActiveColor] = useState(null);
+
+  const mode = isOrderedMode ? 'ordered' : 'random';
 
   const activateTrafficLight = () => {
     if (!isTrafficLightActivated) {
@@ -29,6 +30,10 @@ const Light = () => {
     fetchLight({ mode: 'random' }).then((value) => setActiveColor(value));
   }
 
+  const changeLight = () => {
+    fetchLight({ mode, activeColor }).then((value) => setActiveColor(value));
+  }
+
   return (
     <div>
       <div
@@ -39,7 +44,8 @@ const Light = () => {
         <div className={`light bottom-light ${activeColor === 'green' ? "active" : ""}`} />
       </div>
       <ChangeButton
-        onClick={() => setIsOrderedMode(!isOrderedMode)} />
+        handleClick={() => changeLight()}
+      />
     </div>
   );
 };
