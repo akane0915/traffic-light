@@ -12,6 +12,15 @@ const ChangeButton = ({ handleClick }) => {
   )
 }
 
+const ModeButton = ({ handleClick }) => {
+  return (
+    <button
+      onClick={() => handleClick()}>
+      Switch Mode!
+    </button>
+  )
+}
+
 const Light = () => {
   const [isOrderedMode, setIsOrderedMode] = useState(false);
   const [isTrafficLightActivated, setIsTrafficLightActivated] = useState(false);
@@ -22,8 +31,10 @@ const Light = () => {
   const activateTrafficLight = () => {
     if (!isTrafficLightActivated) {
       activateRandomLight();
-      setIsTrafficLightActivated(true);
+      return setIsTrafficLightActivated(true);
     }
+    return alert('You have already activated the traffic light. \n' +
+      'Try clicking the Change! button instead!')
   }
 
   const activateRandomLight = () => {
@@ -31,7 +42,13 @@ const Light = () => {
   }
 
   const changeLight = () => {
-    fetchLight({ mode, activeColor }).then((value) => setActiveColor(value));
+    isTrafficLightActivated
+      ? fetchLight({ mode, activeColor }).then((value) => setActiveColor(value))
+      : alert('You must click the traffic light to activate first!')
+  }
+
+  const changeMode = () => {
+    setIsOrderedMode(!isOrderedMode);
   }
 
   return (
@@ -46,6 +63,10 @@ const Light = () => {
       <ChangeButton
         handleClick={() => changeLight()}
       />
+      <ModeButton
+        handleClick={() => changeMode()}
+      />
+      <p>{`Current Mode: ${mode}`}</p>
     </div>
   );
 };
