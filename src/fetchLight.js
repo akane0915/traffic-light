@@ -1,4 +1,4 @@
-export default function fetchLight({ mode, activeColor }) {
+const fetchLight = ({ mode, activeColor }) => {
   switch (mode) {
     case 'random':
       return new Promise((resolve, reject) => {
@@ -35,3 +35,5 @@ const getOrderedColor = (color) => {
       break;
   }
 }
+
+export { fetchLight };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.scss";
 
-import fetchLight from "./fetchLight";
+import { fetchLight } from "./fetchLight";
 
 const ChangeButton = ({ handleClick }) => {
   return (
@@ -34,7 +34,7 @@ const Light = () => {
       return setIsTrafficLightActivated(true);
     }
     return alert('You have already activated the traffic light. \n' +
-      'Try clicking the Change! button instead!')
+      'Try clicking the "Change!" button instead!')
   }
 
   const activateRandomLight = () => {
@@ -48,7 +48,9 @@ const Light = () => {
   }
 
   const changeMode = () => {
-    setIsOrderedMode(!isOrderedMode);
+    isTrafficLightActivated
+      ? setIsOrderedMode(!isOrderedMode)
+      : alert('You must click the traffic light to activate a random light before switching modes!')
   }
 
   return (
@@ -75,6 +77,7 @@ const App = () => {
   return (
     // Accessiblity standards expect a main element to be on each page
     <main>
+      <h3>Click on the traffic light to activate a random light!</h3>
       <Light />
     </main>
   )
