@@ -20,20 +20,20 @@ const getRandomColor = () => {
   return options[Math.floor(Math.random() * 3)];
 }
 
-const getOrderedColor = (color) => {
-  switch (color) {
+const getOrderedColor = (activeColor) => {
+  switch (activeColor) {
     case 'green':
       return 'yellow';
 
     case 'yellow':
-      return 'red'
+      return 'red';
 
     case 'red':
-      return 'green'
+      return 'green';
 
     default:
       break;
   }
 }
 
-export { fetchLight };
+export default fetchLight;
