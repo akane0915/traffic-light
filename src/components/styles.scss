@@ -12,22 +12,22 @@ $bottom-color: $green;
 
 // Styles wrapped in .light-app to ensure accurate scoping
 .light-app {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  align-items: center;
   justify-content: center;
+  width: 300px;
 
   .traffic-light {
+    align-items: center;
     background-color: $black;
-    height: 350px;
-    width: 130px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    height: 350px;
     justify-content: space-around;
     padding: 10px 0px;
-    border-radius: 10px;
+    width: 130px;
 
     &:hover {
       cursor: pointer;
@@ -65,14 +65,11 @@ $bottom-color: $green;
   }
 
   .button {
-    margin: 2px 0;
-    color: $white;
     background: $blue;
-    padding: 10px;
     border-radius: 5px;
-    display: inline-block;
-    border: none;
-    transition: all 0.4s ease 0s;
+    color: $white;
+    margin: 2px 0;
+    padding: 10px;
 
     &:hover {
       cursor: pointer;
